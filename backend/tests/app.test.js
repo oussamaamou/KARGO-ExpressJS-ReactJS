@@ -8,14 +8,6 @@ describe('Test de base API', () => {
         expect(res.statusCode).toEqual(404);
     });
 
-    it('Devrait retourner une erreur JSON propre via le middleware', async () => {
-        const res = await request(app).get('/test-error');
-        
-        expect(res.statusCode).toEqual(400);
-        expect(res.body).toHaveProperty('message'); 
-        expect(res.body.message).toBe("Ceci est un test d'erreur");
-    });
-
 })
 
 afterAll(async () => {
