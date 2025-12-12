@@ -1,6 +1,35 @@
-
+import { useState ,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 const LoginPage = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const {login} = useAuth();
+    const navigate = useNavigate();
+
+    const handelSubmit = async(e) => {
+        e.preventDefault();
+        setError('');
+
+        const result = await login(email, password);
+
+        if (result.success) {
+
+            if (result.role === 'admin') {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/chauffeur/mes-trajets');
+            }
+        } else {
+            setError(result.message);
+        }
+
+
+    }
 
     return(
         
@@ -12,23 +41,27 @@ const LoginPage = () => {
                     className="mx-auto h-10 w-auto"
                 />
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                    Sign in to your account
+                    Connectez-vous
                 </h2>
             </div>
 
+            {error && <div className="p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+                <span class="font-medium">{error}</span>
+            </div>}
+
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={handelSubmit} className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                            Email address
+                            Email
                         </label>
                         <div className="mt-2">
                             <input
-                                id="email"
-                                name="email"
+                                value={email}
                                 type="email"
                                 required
-                                autoComplete="email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="oussama@gmail.com"
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                         </div>
@@ -41,17 +74,17 @@ const LoginPage = () => {
                             </label>
                             <div className="text-sm">
                                 <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                                    Forgot password?
+                                    Mot de passe oublié !
                                 </a>
                             </div>
                         </div>
                         <div className="mt-2">
                             <input
-                                id="password"
-                                name="password"
+                                value={password}
                                 type="password"
                                 required
-                                autoComplete="current-password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="********"
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                         </div>
@@ -62,17 +95,11 @@ const LoginPage = () => {
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
-                            Sign in
+                            Se Connecter
                         </button>
                     </div>
                 </form>
 
-                <p className="mt-10 text-center text-sm/6 text-gray-500">
-                    Not a member?{' '}
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                        Start a 14 day free trial
-                    </a>
-                </p>
             </div>
         </div>
         

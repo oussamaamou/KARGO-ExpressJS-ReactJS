@@ -1,6 +1,16 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 
 const ChauffeurLayout = () => {
+
+    const {logout} = useAuth();
+    const navigate = useNavigate();
+
+    const handelLogout = () => {
+        logout();
+        navigate('/login');
+    }
+
     return (
         <div className="flex min-h-screen bg-slate-50 text-slate-800">
             <aside className="w-20 lg:w-64 bg-indigo-800 text-indigo-100 flex flex-col fixed h-full z-20 transition-all duration-300">
@@ -49,11 +59,15 @@ const ChauffeurLayout = () => {
                 </nav>
 
                 <div className="p-4 border-t border-indigo-800/50">
-                    <button className="w-full flex items-center gap-3 p-3 rounded-lg text-white hover:bg-indigo-950 hover:text-white transition-colors cursor-pointer">
+                    <button 
+                        className="w-full flex items-center gap-3 p-3 rounded-lg text-white hover:bg-indigo-950 hover:text-white transition-colors cursor-pointer"
+                        onClick={handelLogout}
+                        >
+
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z">
                         </path>
                         </svg>
-                        <span className="hidden lg:block font-medium text-sm">Retour Portail</span>
+                        <span className="hidden lg:block font-medium text-sm">Logout</span>
                     </button>
                 </div>
             </aside>
