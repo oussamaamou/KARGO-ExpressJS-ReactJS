@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoutes from './ProtectedRoutes';
 
 import AdminLayout from '../layouts/AdminLayout';
 import ChauffeurLayout from '../layouts/ChauffeurLayout';
@@ -17,13 +18,17 @@ const AppRoutes = () => {
             <Route path='/login' element={<LoginPage />} />
 
             {/* Routes Admin */}
-            <Route path="admin" element={<AdminLayout />}>
-                <Route path="dashboard" element={<AdminDashboard />} />
+            <Route element={<ProtectedRoutes allowedRoles={['admin']} />}>
+                <Route path="admin" element={<AdminLayout />}>
+                    <Route path="dashboard" element={<AdminDashboard />} />
+                </Route>
             </Route>
 
             {/* Routes Chauffeur */}
-            <Route path='chauffeur' element={<ChauffeurLayout />}>
-                <Route path='mes-trajets' element={<ChauffeurDashboard />} />
+            <Route element={<ProtectedRoutes allowedRoles={['chauffeur']} />}>
+                <Route path='chauffeur' element={<ChauffeurLayout />}>
+                    <Route path='mes-trajets' element={<ChauffeurDashboard />} />
+                </Route>
             </Route>
 
             {/* Route 404 */}
