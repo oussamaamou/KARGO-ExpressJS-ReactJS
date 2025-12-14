@@ -1,4 +1,4 @@
-import CamionService from "../services/CamionService";
+import CamionService from "../services/CamionService.js";
 
 // @desc Créer un camion
 // @route POST/api/camion/

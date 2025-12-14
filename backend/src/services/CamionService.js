@@ -1,4 +1,4 @@
-import Camion from "../models/Camion";
+import Camion from "../models/Camion.js";
 
 const createCamion = async(camionData) => {
     const camionExist = await Camion.findOne({ immatriculation: camionData.immatriculation})
@@ -38,6 +38,5 @@ const deleteCamion = async(id) => {
 
     return camion;
 }
-
 
 export default {createCamion, getAllCamions, findCamionById, updateCamion, deleteCamion}

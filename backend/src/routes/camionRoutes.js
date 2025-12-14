@@ -1,18 +1,18 @@
 import express from 'express';
 
-import CamionController from '../controllers/CamionController';
-import {protect, authorize} from '../middlewares/authMiddleware';
+import CamionController from '../controllers/CamionController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
 const camionRoutes = express.Router();
-camionRoutes.use(protect);
+camionRoutes.use(authMiddleware.protect);
 
 camionRoutes.route('/camion')
     .get(CamionController.getAllCamions)
-    .post(authorize('admin') ,CamionController.createCamion);
+    .post(authMiddleware.authorize('admin') ,CamionController.createCamion);
 
 camionRoutes.route('/camion/:id')
-    .put(CamionController.updateCamion)
-    .delete(authorize('admin') ,CamionController.deleteCamion);
+    .put(authMiddleware.authorize('admin') ,CamionController.updateCamion)
+    .delete(authMiddleware.authorize('admin') ,CamionController.deleteCamion);
 
 
 export default camionRoutes;

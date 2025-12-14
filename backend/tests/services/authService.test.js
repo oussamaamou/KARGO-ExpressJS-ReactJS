@@ -1,10 +1,9 @@
-import authServices from '../src/services/authServices.js';
-import User from "../src/models/User.js";
+import authServices from '../../src/services/authServices.js';
+import User from "../../src/models/User.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-// On "Mock" (simule) les dépendances pour ne pas toucher la vraie DB
-jest.mock('../src/models/User.js');
+jest.mock('../../src/models/User.js');
 jest.mock('bcryptjs');
 jest.mock('jsonwebtoken');
 
