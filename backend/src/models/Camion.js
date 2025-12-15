@@ -32,6 +32,19 @@ const CamionSchema = new mongoose.Schema(
         dernierEntretienKm: {
             type: Number,
             default: 0
+        },
+        dernierVidangeKm: {
+        type: Number,
+        default: 0 
+        },
+        etatPneus: {
+            type: String,
+            enum: ["bon", "moyen", "critique"],
+            default: "bon"
+        },
+        maintenanceRequise: {
+            type: Boolean,
+            default: false
         }
     },
     { 
