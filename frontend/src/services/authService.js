@@ -15,4 +15,9 @@ const logout = () => {
     localStorage.removeItem('user');
 }
 
-export default {login, logout};
+const getChauffeurs = async () => {
+    const response = await api.get('/chauffeurs'); 
+    return response.data;
+};
+
+export default {login, logout, getChauffeurs};
