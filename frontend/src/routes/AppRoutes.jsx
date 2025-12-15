@@ -11,6 +11,7 @@ import Page404 from '../pages/Page404';
 import Camions from '../pages/admin/Camions';
 import Remoques from '../pages/admin/Remoques';
 import MaintenanceRules from '../pages/admin/MaintenanceRules';
+import Trajets from '../pages/admin/Trajets';
 
 const AppRoutes = () => {
     return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
                     <Route path="camions" element={<Camions />}/>
                     <Route path='remoques' element={<Remoques />} />
                     <Route path='maintenance' element={<MaintenanceRules />} />
+                    <Route path='trajets' element={<Trajets/>} />
                 </Route>
             </Route>
 

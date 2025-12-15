@@ -1,4 +1,5 @@
 import authServices from "../services/authServices.js";
+import User from "../models/User.js";
 
 // @desc Inscrire un nouvel utilisateur
 // @route POST/api/auth/register
@@ -53,4 +54,18 @@ const login = async(req, res, next) => {
     }
 }
 
-export default {register, login};
+// @desc Afficher tous les chauffeurs
+// @route POST/api/auth/login
+const getChauffeurs = async (req, res, next) => {
+    try {
+        const chauffeurs = await User.find({ role: 'chauffeur' }).select('-password');
+        res.status(200).json({ 
+            success: true, 
+            data: chauffeurs 
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export default {register, login, getChauffeurs};

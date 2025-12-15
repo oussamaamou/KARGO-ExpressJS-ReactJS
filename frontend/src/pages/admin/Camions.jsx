@@ -66,7 +66,7 @@ const Camions = () => {
 
     return(
         <div className="p-6">
-            {/* En-tête */}
+
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold text-gray-800">Gestion des Camions</h1>
                 <button 
@@ -77,9 +77,8 @@ const Camions = () => {
                 </button>
             </div>
 
-            {/* Tableau */}
             {loading ? (
-                <p>Chargement...</p>
+                <Loader />
             ) : (
                 <div className="bg-white shadow-md rounded-lg overflow-hidden">
                     <table className="min-w-full divide-y divide-gray-200">
@@ -121,7 +120,6 @@ const Camions = () => {
                 </div>
             )}
 
-            {/* Modal (Formulaire) - Simple et efficace */}
             {showModal && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg shadow-xl w-96">

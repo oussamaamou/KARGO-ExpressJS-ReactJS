@@ -8,7 +8,6 @@ const MaintenanceRules = () => {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
 
-    // Charger les règles actuelles
     useEffect(() => {
         const fetchRules = async () => {
             try {

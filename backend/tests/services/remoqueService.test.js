@@ -1,7 +1,6 @@
 import RemoqueService from '../../src/services/RemoqueService.js';
 import Remoque from '../../src/models/Remoque.js';
 
-// 1. On "Mock" le modèle pour ne pas toucher la vraie BDD
 jest.mock('../../src/models/Remoque.js');
 
 describe('Service Remoque', () => {

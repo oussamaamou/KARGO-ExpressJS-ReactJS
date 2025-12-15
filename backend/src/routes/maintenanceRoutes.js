@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use(authMiddleware.protect);
 
-router.route("/rules")
+router.route("/regles")
     .get(authMiddleware.authorize("admin"), MaintenanceController.getRules)
     .put(authMiddleware.authorize("admin"), MaintenanceController.updateRules);
 

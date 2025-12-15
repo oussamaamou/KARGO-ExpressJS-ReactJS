@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const maintenanceRuleSchema = new mongoose.Schema({
+const MaintenanceRuleSchema = new mongoose.Schema({
     type: { 
         type: String, 
         default: "global" 
@@ -17,5 +17,5 @@ const maintenanceRuleSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-const MaintenanceRule = mongoose.model("MaintenanceRule", maintenanceRuleSchema);
+const MaintenanceRule = mongoose.model("MaintenanceRule", MaintenanceRuleSchema);
 export default MaintenanceRule;

@@ -1,7 +1,6 @@
 import camionService from '../../src/services/CamionService.js';
 import Camion from '../../src/models/Camion.js';
 
-// 1. On "Mock" le modèle pour ne pas toucher la vraie BDD
 jest.mock('../../src/models/Camion.js');
 
 describe('Service Camion', () => {
