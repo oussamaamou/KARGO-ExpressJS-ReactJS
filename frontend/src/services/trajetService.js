@@ -15,8 +15,9 @@ const getMyTrajets = async () => {
     return response.data;
 };
 
-const updateStatus = async (id, status) => {
-    const response = await api.patch(`/trajets/${id}/status`, { status });
+const updateStatus = async (id, status, data = null) => {
+    const payload = { status, ...data };
+    const response = await api.patch(`/trajets/${id}/status`, payload);
     return response.data;
 };
 
