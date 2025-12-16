@@ -42,4 +42,21 @@ const getChauffeurTrajets = async (userId) => {
         .sort({ dateDepart: -1 });
 };
 
-export default { createTrajet, getAllTrajets, getChauffeurTrajets };
+const updateTrajetStatus = async (id, newStatus) => {
+    const trajet = await Trajet.findById(id);
+    if (!trajet) throw new Error("Trajet non trouvé");
+
+    if (trajet.status === 'termine') {
+        throw new Error("Ce trajet est déjà terminé.");
+    }
+
+    trajet.status = newStatus;
+    
+    if (newStatus === 'termine') {
+        await Camion.findByIdAndUpdate(trajet.camion, { status: 'disponible' });
+    }
+
+    return await trajet.save();
+};
+
+export default { createTrajet, getAllTrajets, getChauffeurTrajets, updateTrajetStatus };
