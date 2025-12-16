@@ -29,7 +29,7 @@ const createTrajet = async (trajetData) => {
 
 const getAllTrajets = async () => {
     return await Trajet.find()
-        .populate("chauffeur", "nom email") 
+        .populate("chauffeur", "nom prenom email") 
         .populate("camion", "immatriculation marque") 
         .populate("remorque", "immatriculation type")
         .sort({ dateDepart: -1 });
@@ -37,6 +37,7 @@ const getAllTrajets = async () => {
 
 const getChauffeurTrajets = async (userId) => {
     return await Trajet.find({ chauffeur: userId })
+        .populate("chauffeur", "nom prenom email") 
         .populate("camion", "immatriculation marque")
         .populate("remorque", "immatriculation type")
         .sort({ dateDepart: -1 });
