@@ -42,7 +42,7 @@ const getChauffeurTrajets = async (userId) => {
         .sort({ dateDepart: -1 });
 };
 
-const updateTrajetStatus = async (id, newStatus) => {
+const updateTrajetStatus = async (id, status, data = {}) => {
     const trajet = await Trajet.findById(id);
     if (!trajet) throw new Error("Trajet non trouvé");
 
@@ -50,12 +50,26 @@ const updateTrajetStatus = async (id, newStatus) => {
         throw new Error("Ce trajet est déjà terminé.");
     }
 
-    trajet.status = newStatus;
-    
-    if (newStatus === 'termine') {
-        await Camion.findByIdAndUpdate(trajet.camion, { status: 'disponible' });
+    if (status === 'termine') {
+        if (!data.kilometrageArrivee || !data.carburantConsomme) {
+            throw new Error("Le kilométrage d'arrivée et le carburant sont obligatoires pour terminer la mission.");
+        }
+
+        const camion = await Camion.findById(trajet.camion);
+
+        if (data.kilometrageArrivee < camion.kilometrage) {
+            throw new Error(`Le kilométrage d'arrivée (${data.kilometrageArrivee}) ne peut pas être inférieur au kilométrage actuel du camion (${camion.kilometrage}).`);
+        }
+
+        trajet.kilometrageArrivee = data.kilometrageArrivee;
+        trajet.carburantConsomme = data.carburantConsomme;
+
+        camion.kilometrage = data.kilometrageArrivee;
+        camion.status = 'disponible'; 
+        await camion.save();
     }
 
+    trajet.status = status;
     return await trajet.save();
 };
 
