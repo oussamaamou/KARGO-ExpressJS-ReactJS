@@ -48,8 +48,14 @@ const getMyTrajets = async (req, res, next) => {
 // @route PUT/api/trajets
 const updateStatus = async (req, res, next) => {
     try {
-        const { status } = req.body;
-        const trajet = await TrajetService.updateTrajetStatus(req.params.id, status);
+        const { status, kilometrageArrivee, carburantConsomme } = req.body;
+        
+        const trajet = await TrajetService.updateTrajetStatus(
+            req.params.id, 
+            status, 
+            { kilometrageArrivee, carburantConsomme }
+        );
+        
         res.status(200).json({ success: true, data: trajet });
     } catch (error) {
         next(error);
