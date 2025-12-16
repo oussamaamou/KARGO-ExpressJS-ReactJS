@@ -15,8 +15,14 @@ const getMyTrajets = async () => {
     return response.data;
 };
 
+const updateStatus = async (id, status) => {
+    const response = await api.patch(`/trajets/${id}/status`, { status });
+    return response.data;
+};
+
 export default {
     getAllTrajets,
     createTrajet,
-    getMyTrajets
+    getMyTrajets,
+    updateStatus
 };
