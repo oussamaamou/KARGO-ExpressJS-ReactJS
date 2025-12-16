@@ -11,5 +11,6 @@ router.route("/trajets")
     .post(authMiddleware.authorize("admin"), TrajetController.createTrajet);
 
 router.get("/mes-trajets", TrajetController.getMyTrajets);
+router.patch("/trajets/:id/status", TrajetController.updateStatus);
 
 export default router;

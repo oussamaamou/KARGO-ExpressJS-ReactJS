@@ -15,7 +15,7 @@ const createTrajet = async (req, res, next) => {
 };
 
 // @desc Afficher tous les trajets
-// @route POST/api/trajets
+// @route GET/api/trajets
 const getAllTrajets = async (req, res, next) => {
   try {
     const trajets = await TrajetService.getAllTrajets();
@@ -30,10 +30,10 @@ const getAllTrajets = async (req, res, next) => {
 };
 
 // @desc Afficher les trajets assignés
-// @route POST/api/trajets
+// @route GET/api/trajets
 const getMyTrajets = async (req, res, next) => {
   try {
-    const trajets = await TrajetService.getDriverTrajets(req.user.id);
+    const trajets = await TrajetService.getChauffeurTrajets(req.user.id);
     res.status(200).json({
       success: true,
       count: trajets.length,
@@ -44,4 +44,16 @@ const getMyTrajets = async (req, res, next) => {
   }
 };
 
-export default { createTrajet, getAllTrajets, getMyTrajets };
+// @desc Modifier le statut d'un trajet
+// @route PUT/api/trajets
+const updateStatus = async (req, res, next) => {
+    try {
+        const { status } = req.body;
+        const trajet = await TrajetService.updateTrajetStatus(req.params.id, status);
+        res.status(200).json({ success: true, data: trajet });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export default { createTrajet, getAllTrajets, getMyTrajets, updateStatus };
