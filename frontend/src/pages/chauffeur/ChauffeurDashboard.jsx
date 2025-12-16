@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import trajetService from '../../services/trajetService';
 import Loader from '../../components/common/loader/Loader';
+import { generateOrdreMission } from '../../utils/pdfGenerator';
 
 const ChauffeurDashboard = () => {
     const [trajets, setTrajets] = useState([]);
@@ -72,8 +73,8 @@ const ChauffeurDashboard = () => {
                                 {new Date(trajet.dateDepart).toLocaleDateString()}
                             </span>
                             <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${trajet.status === 'planifie' ? 'bg-blue-200 text-blue-800' :
-                                    trajet.status === 'en_cours' ? 'bg-yellow-200 text-yellow-800' :
-                                        'bg-green-200 text-green-800'
+                                trajet.status === 'en_cours' ? 'bg-yellow-200 text-yellow-800' :
+                                    'bg-green-200 text-green-800'
                                 }`}>
                                 {trajet.status}
                             </span>
@@ -95,6 +96,18 @@ const ChauffeurDashboard = () => {
                             <div className="bg-gray-50 p-3 rounded mb-4 text-sm text-gray-600">
                                 <p>🚛 {trajet.camion?.immatriculation} - {trajet.camion?.marque}</p>
                             </div>
+
+                            {(trajet.status === 'planifie' || trajet.status === 'en_cours') && (
+                                <button
+                                    onClick={() => generateOrdreMission(trajet)}
+                                    className="w-full mb-2 bg-gray-100 text-gray-700 py-3 rounded-lg font-bold border border-gray-300 hover:bg-gray-200 transition flex justify-center items-center gap-2"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    Télécharger Ordre de Mission
+                                </button>
+                            )}
 
                             {trajet.status === 'planifie' && (
                                 <button onClick={() => handleStartMission(trajet._id)}
