@@ -87,7 +87,7 @@ describe('Service Trajet', () => {
             const result = await TrajetService.getChauffeurTrajets('U1');
 
             expect(Trajet.find).toHaveBeenCalledWith({ chauffeur: 'U1' });
-            expect(mockQuery.populate).toHaveBeenCalledTimes(2);
+            expect(mockQuery.populate).toHaveBeenCalledTimes(3);
             expect(result).toEqual(mockList);
         });
     });

@@ -5,8 +5,11 @@ import AdminLayout from '../layouts/AdminLayout';
 import ChauffeurLayout from '../layouts/ChauffeurLayout';
 
 import LoginPage from '../pages/Login';
-import AdminDashboard from '../pages/admin/AdminDashboard';
+
+import MesTrajets from '../pages/chauffeur/MesTrajets';
 import ChauffeurDashboard from '../pages/chauffeur/ChauffeurDashboard';
+
+import AdminDashboard from '../pages/admin/AdminDashboard';
 import Page404 from '../pages/Page404';
 import Camions from '../pages/admin/Camions';
 import Remoques from '../pages/admin/Remoques';
@@ -35,7 +38,8 @@ const AppRoutes = () => {
             {/* Routes Chauffeur */}
             <Route element={<ProtectedRoutes allowedRoles={['chauffeur']} />}>
                 <Route path='chauffeur' element={<ChauffeurLayout />}>
-                    <Route path='mes-trajets' element={<ChauffeurDashboard />} />
+                    <Route path="dashboard" element={<ChauffeurDashboard />} />
+                    <Route path='mes-trajets' element={<MesTrajets />} />
                 </Route>
             </Route>
 
