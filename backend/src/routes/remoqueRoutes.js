@@ -3,16 +3,16 @@ import express from 'express';
 import RemoqueController from '../controllers/RemoqueController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 
-const remoqueRoutes = express.Router();
+const remoqueRouter = express.Router();
 
-remoqueRoutes.use(authMiddleware.protect);
+remoqueRouter.use(authMiddleware.protect);
 
-remoqueRoutes.route('/remoque')
+remoqueRouter.route('/remoque')
     .get(RemoqueController.getAllRemoques)
     .post(authMiddleware.authorize('admin'), RemoqueController.createRemoque);
 
-remoqueRoutes.route('/remoque/:id')
+remoqueRouter.route('/remoque/:id')
     .put(authMiddleware.authorize('admin'), RemoqueController.updateRemoque) 
     .delete(authMiddleware.authorize('admin'), RemoqueController.deleteRemoque);
 
-export default remoqueRoutes;
+export default remoqueRouter;
