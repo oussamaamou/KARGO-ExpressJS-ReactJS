@@ -6,6 +6,12 @@ const Camions = () => {
     const [camions, setCamions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const [searchBarre, setSearchBarre] = useState('');
+
+    const SearchBarre = camions.filter((camion) => {
+        if(searchBarre === '') return true;
+        return searchBarre === camion.immatriculation;
+    })
 
     const [formData, setFormData] = useState({
         immatriculation: "",
@@ -77,6 +83,12 @@ const Camions = () => {
                 </button>
             </div>
 
+            <input className="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" 
+                value={searchBarre}
+                onChange={(e) => setSearchBarre(e.target.value)}
+                placeholder="Search" 
+                required />
+
             {loading ? (
                 <Loader />
             ) : (
@@ -92,7 +104,7 @@ const Camions = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {camions.map((camion) => (
+                            {SearchBarre.map((camion) => (
                                 <tr key={camion._id}>
                                     <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{camion.immatriculation}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-gray-500">{camion.marque} {camion.modele}</td>

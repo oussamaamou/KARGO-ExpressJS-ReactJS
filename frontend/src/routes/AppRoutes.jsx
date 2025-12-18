@@ -9,6 +9,7 @@ import RegisterPage from '../pages/Register';
 
 import MesTrajets from '../pages/chauffeur/MesTrajets';
 import ChauffeurDashboard from '../pages/chauffeur/ChauffeurDashboard';
+import Profile from '../pages/chauffeur/Profile';
 
 import AdminDashboard from '../pages/admin/AdminDashboard';
 import Page404 from '../pages/Page404';
@@ -42,6 +43,7 @@ const AppRoutes = () => {
                 <Route path='chauffeur' element={<ChauffeurLayout />}>
                     <Route path="dashboard" element={<ChauffeurDashboard />} />
                     <Route path='mes-trajets' element={<MesTrajets />} />
+                    <Route path='profile' element={<Profile />} />
                 </Route>
             </Route>
 

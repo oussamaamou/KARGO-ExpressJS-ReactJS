@@ -10,7 +10,8 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if(storedUser){
-            setUser(JSON.parse(storedUser));
+            console.log(JSON.parse(storedUser))
+            setUser(JSON.parse(storedUser).user);
         }
         setLoading(false);
 
@@ -26,7 +27,7 @@ export const AuthProvider = ({children}) => {
             }
 
         } catch(error){
-            const message =error.response?.data?.message || "Erreur d'inscription";
+            const message = error.response?.data?.message || "Erreur d'inscription";
             return {
                 success: false,
                 message
@@ -38,7 +39,7 @@ export const AuthProvider = ({children}) => {
     const login = async(email, password) => {
         try{
             const data = await authService.login(email, password);
-            setUser(data);
+            setUser(data.user);
             return{
                 success: true,
                 role: data.user.role
