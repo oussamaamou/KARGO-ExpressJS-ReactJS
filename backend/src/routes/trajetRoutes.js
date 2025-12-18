@@ -2,15 +2,15 @@ import express from "express";
 import TrajetController from "../controllers/TrajetController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
-const router = express.Router();
+const trajetRouter = express.Router();
 
-router.use(authMiddleware.protect);
+trajetRouter.use(authMiddleware.protect);
 
-router.route("/trajets")
+trajetRouter.route("/trajets")
     .get(authMiddleware.authorize("admin"), TrajetController.getAllTrajets)
     .post(authMiddleware.authorize("admin"), TrajetController.createTrajet);
 
-router.get("/mes-trajets", TrajetController.getMyTrajets);
-router.patch("/trajets/:id/status", TrajetController.updateStatus);
+trajetRouter.get("/mes-trajets", TrajetController.getMyTrajets);
+trajetRouter.patch("/trajets/:id/status", TrajetController.updateStatus);
 
-export default router;
+export default trajetRouter;

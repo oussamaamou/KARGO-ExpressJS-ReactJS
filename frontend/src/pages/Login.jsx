@@ -22,7 +22,7 @@ const LoginPage = () => {
             if (result.role === 'admin') {
                 navigate('/admin/dashboard');
             } else {
-                navigate('/chauffeur/mes-trajets');
+                navigate('/chauffeur/dashboard');
             }
         } else {
             setError(result.message);

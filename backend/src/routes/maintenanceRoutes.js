@@ -2,12 +2,12 @@ import express from "express";
 import MaintenanceController from "../controllers/MaintenanceController.js";
 import authMiddleware from '../middlewares/authMiddleware.js';
 
-const router = express.Router();
+const maintenanceRouter = express.Router();
 
-router.use(authMiddleware.protect);
+maintenanceRouter.use(authMiddleware.protect);
 
-router.route("/regles")
+maintenanceRouter.route("/regles")
     .get(authMiddleware.authorize("admin"), MaintenanceController.getRules)
     .put(authMiddleware.authorize("admin"), MaintenanceController.updateRules);
 
-export default router;
+export default maintenanceRouter;

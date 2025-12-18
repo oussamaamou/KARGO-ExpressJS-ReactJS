@@ -16,6 +16,24 @@ export const AuthProvider = ({children}) => {
 
     }, [])
 
+    // Action de register
+    const register = async(useData) => {
+        try{
+            const data = await authService.register(useData);
+            return {
+                success: true,
+                message: data.message
+            }
+
+        } catch(error){
+            const message =error.response?.data?.message || "Erreur d'inscription";
+            return {
+                success: false,
+                message
+            }
+        }
+    }
+
     // Action de login
     const login = async(email, password) => {
         try{
@@ -43,7 +61,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return(
-        <AuthContext.Provider value={{login, logout, user, loading}}>
+        <AuthContext.Provider value={{login, logout, user, loading, register}}>
             {!loading && children}
         </AuthContext.Provider>
     )

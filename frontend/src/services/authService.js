@@ -1,5 +1,10 @@
 import api from "./api";
 
+const register = async(userData) => {
+    const response = await api.post('/auth/register', userData);
+    return response.data;
+}
+
 const login = async(email, password) => {
     const response = await api.post('/auth/login', {email, password});
 
@@ -20,4 +25,4 @@ const getChauffeurs = async () => {
     return response.data;
 };
 
-export default {login, logout, getChauffeurs};
+export default {login, logout, getChauffeurs, register};

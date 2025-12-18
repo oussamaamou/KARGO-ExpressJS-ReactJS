@@ -5,6 +5,7 @@ import AdminLayout from '../layouts/AdminLayout';
 import ChauffeurLayout from '../layouts/ChauffeurLayout';
 
 import LoginPage from '../pages/Login';
+import RegisterPage from '../pages/Register';
 
 import MesTrajets from '../pages/chauffeur/MesTrajets';
 import ChauffeurDashboard from '../pages/chauffeur/ChauffeurDashboard';
@@ -23,6 +24,7 @@ const AppRoutes = () => {
             {/* Routes Publiques*/}
             <Route path='/' element={<Navigate to="/login" replace />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
 
             {/* Routes Admin */}
             <Route element={<ProtectedRoutes allowedRoles={['admin']} />}>
