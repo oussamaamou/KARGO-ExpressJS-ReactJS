@@ -11,7 +11,7 @@ const MaintenanceRules = () => {
     useEffect(() => {
         const fetchRules = async () => {
             try {
-                const res = await api.get('/maintenance/rules');
+                const res = await api.get('/maintenance/regles');
                 setRules(res.data.data);
                 setLoading(false);
             } catch (error) {
@@ -27,7 +27,7 @@ const MaintenanceRules = () => {
         e.preventDefault();
         setMessage("");
         try {
-            await api.put('/maintenance/rules', rules);
+            await api.put('/maintenance/regles', rules);
             setMessage("Règles mises à jour avec succès !");
             setTimeout(() => setMessage(""), 3000);
         } catch (error) {
@@ -75,6 +75,8 @@ const MaintenanceRules = () => {
                             onChange={(e) => setRules({ ...rules, seuilPneusKm: Number(e.target.value) })}
                         />
                     </div>
+
+                    
 
                     <button
                         type="submit"
